@@ -1,40 +1,36 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
+// apps/web/src/app/layout.tsx
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
 
-import { Navbar } from '@/components/navbar';
-import Providers from "@/components/providers"
+import Navbar from "@/components/navbar";
+import Providers from "@/contexts/providers";
+import WagmiProviderFC from "@/providers/wagmi-provider";
 
-const inter = Inter({ subsets: ['latin'] });
-
+const inter = Inter({ subsets: ["latin"] });
 const appUrl = process.env.NEXT_PUBLIC_URL || "http://localhost:3000";
 
-// Embed metadata for Farcaster sharing
-const frame = {
-  version: "1",
-  imageUrl: `${appUrl}/opengraph-image.png`,
-  button: {
-    title: "Launch my-celo-app",
-    action: {
-      type: "launch_frame",
-      name: "my-celo-app",
-      url: appUrl,
-      splashImageUrl: `${appUrl}/icon.png`,
-      splashBackgroundColor: "#ffffff",
-    },
-  },
-};
-
 export const metadata: Metadata = {
-  title: 'my-celo-app',
-  description: 'A new Celo blockchain project',
+  title: "my-celo-app",
+  description: "A new Celo blockchain project",
   openGraph: {
-    title: 'my-celo-app',
-    description: 'A new Celo blockchain project',
+    title: "my-celo-app",
+    description: "A new Celo blockchain project",
     images: [`${appUrl}/opengraph-image.png`],
   },
   other: {
-    "fc:frame": JSON.stringify(frame),
+    "fc:frame": JSON.stringify({
+      version: "1",
+      imageUrl: `${appUrl}/opengraph-image.png`,
+      button: {
+        title: "Launch my-celo-app",
+        action: {
+          type: "launch_frame",
+          name: "my-celo-app",
+          url: appUrl,
+        },
+      },
+    }),
   },
 };
 
@@ -46,15 +42,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* Navbar is included on all pages */}
-        <div className="relative flex min-h-screen flex-col">
+        <WagmiProviderFC>
           <Providers>
             <Navbar />
-            <main className="flex-1">
-              {children}
-            </main>
+            <main>{children}</main>
           </Providers>
-        </div>
+        </WagmiProviderFC>
       </body>
     </html>
   );

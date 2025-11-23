@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "description": "A new Celo blockchain project",
   "private": true,
+
+  "packageManager": "pnpm@8.15.8",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
@@ -10,14 +17,10 @@
     "clean": "turbo clean",
     "type-check": "turbo type-check"
   },
+
   "devDependencies": {
     "@types/node": "^20.8.0",
     "turbo": "^1.10.16",
     "typescript": "^5.2.2"
-  },
-  "packageManager": "pnpm@8.10.0",
-  "engines": {
-    "node": ">=18.0.0",
-    "pnpm": ">=8.0.0"
   }
 }
