@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-import Navbar from "@/components/navbar";
+import Navbar from "../components/navbar";
 import Providers from "@/contexts/providers";
 import WagmiProviderFC from "@/providers/wagmi-provider";
 
