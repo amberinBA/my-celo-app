@@ -1,23 +1,9 @@
 "use client";
 
-import { XMTPProvider as SDKProvider } from "@xmtp/react-sdk";
-import { useAccount } from "wagmi";
+import { ReactNode } from "react";
+import { SDKProvider } from "@xmtp/react-sdk";
 
-export default function XMTPProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const { address, isConnected } = useAccount(); // wallet status
-
-  return (
-    <SDKProvider
-      wallet={isConnected ? { address } : null} // connect only if wallet ready
-      persistConversation={true}
-      autoConnect={true}
-      appVersion="sweatbet-miniapp"
-    >
-      {children}
-    </SDKProvider>
-  );
+export function XMTPProvider({ children }: { children: ReactNode }) {
+  // We pass only client=null for now to disable XMTP until needed
+  return <SDKProvider client={null}>{children}</SDKProvider>;
 }
