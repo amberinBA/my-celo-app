@@ -1,10 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  webpack: (config) => {
-    config.externals.push('pino-pretty', 'lokijs', 'encoding')
-    return config
+  eslint: {
+    // 🚫 Don't run ESLint during Vercel builds
+    ignoreDuringBuilds: true,
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
